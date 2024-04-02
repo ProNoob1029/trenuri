@@ -1,39 +1,8 @@
-/*******************************************************************************************
-*
-*   raylib [core] example - Basic window (adapted for HTML5 platform)
-*
-*   This example is prepared to compile for PLATFORM_WEB and PLATFORM_DESKTOP
-*   As you will notice, code structure is slightly different to the other examples...
-*   To compile it for PLATFORM_WEB just uncomment #define PLATFORM_WEB at beginning
-*
-*   This example has been created using raylib 1.3 (www.raylib.com)
-*   raylib is licensed under an unmodified zlib/libpng license (View raylib.h for details)
-*
-*   Copyright (c) 2015 Ramon Santamaria (@raysan5)
-*
-********************************************************************************************/
-
 #define SUPPORT_FILEFORMAT_JPG
 #include "raylib.h"
 
-#if defined(PLATFORM_WEB)
-    #include <emscripten/emscripten.h>
-#endif
-
-//----------------------------------------------------------------------------------
-// Global Variables Definition
-//----------------------------------------------------------------------------------
 int screenWidth = 800;
-int screenHeight = 450;
-
-//----------------------------------------------------------------------------------
-// Module Functions Declaration
-//----------------------------------------------------------------------------------
-void UpdateDrawFrame(void);     // Update and Draw one frame
-
-//----------------------------------------------------------------------------------
-// Main Entry Point
-//----------------------------------------------------------------------------------
+int screenHeight = 1000;
 
 Vector2 trenPos = {20, 20};
 float xDir = 1.0;
@@ -42,53 +11,20 @@ Color color = { 255, 255, 255, 255 };
 Texture tren;
 Texture poza;
 
-int main()
-{
-    // Initialization
-    //--------------------------------------------------------------------------------------
+int main() {
     InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
 
     tren = LoadTexture("Untitled design.png");
-    poza = LoadTexture("WhatsApp Image 2024-03-21 at 11.19.31 PM.jpg");
+    poza = LoadTexture("bg.png");
 
-#if defined(PLATFORM_WEB)
-    emscripten_set_main_loop(UpdateDrawFrame, 0, 1);
-#else
-    SetTargetFPS(60);   // Set our game to run at 60 frames-per-second
-    //--------------------------------------------------------------------------------------
+    SetTargetFPS(60);
 
-    // Main game loop
-    while (!WindowShouldClose())    // Detect window close button or ESC key
-    {
-        UpdateDrawFrame();
-    }
-#endif
-
-    // De-Initialization
-    //--------------------------------------------------------------------------------------
-    CloseWindow();        // Close window and OpenGL context
-    //--------------------------------------------------------------------------------------
-
-    return 0;
-}
-
-//----------------------------------------------------------------------------------
-// Module Functions Definition
-//----------------------------------------------------------------------------------
-void UpdateDrawFrame(void)
-{
-    // Update
-    //----------------------------------------------------------------------------------
-    // TODO: Update your variables here
-    //----------------------------------------------------------------------------------
-
-    // Draw
-    //----------------------------------------------------------------------------------
-    BeginDrawing();
+    while (!WindowShouldClose()) {
+        BeginDrawing();
 
         ClearBackground(RAYWHITE);
 
-        DrawTextureEx(poza, {0, 0}, 0, 1, WHITE);
+        DrawTextureEx(poza, {-100, -200}, 0, 1, WHITE);
 
         float delta = GetFrameTime();
 
@@ -117,6 +53,8 @@ void UpdateDrawFrame(void)
         //DrawTexture(tren, trenPos.x, trenPos.y, color);
         DrawTextureEx(tren, trenPos, 0.0, 0.2, color);
 
-    EndDrawing();
-    //----------------------------------------------------------------------------------
+        EndDrawing();
+    }
+
+    CloseWindow();
 }
