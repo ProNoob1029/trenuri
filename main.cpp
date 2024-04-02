@@ -16,6 +16,7 @@ struct Edge {
 struct Node {
     int index = -1;
     vector<Edge> neighbors;
+    int indexGraf = -1;
 };
 
 using Graph = vector<Node>;
@@ -31,6 +32,7 @@ void read_file() {
     for (int i = 0; i < nodes; i++) {
         Node node;
         node.index = i;
+        node.indexGraf = grafuri.size();
         graf.push_back(node);
     }
 
