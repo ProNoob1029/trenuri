@@ -1,23 +1,24 @@
-Cluj-Napoca,Apahida
-Apahida,Câmpia Turzii
-Câmpia Turzii,Războieni
-Războieni,Auid
-Auid,Teiuș
-Teiuș,Blaj
-Blaj,Copșa Mică
-Copșa Mică, Mediaș
-Mediaș,Dumbrăveni
-Dumbrăveni,Sighișoara
-Sighișoara,Vânători
-Vânători,Rupea
-Rupea,Brașov
-Brașov,Predeal
-Predeal,Azuga
-Azuga,Bușteni
-Bușteni,Sinaia
-Sinaia,Comarnic
-Comarnic,Câmpina
-Câmpina,Ploiești
+Station1,Station2,Distance(km)
+Cluj-Napoca,Apahida,16
+Apahida,Câmpia Turzii,10
+Câmpia Turzii,Războieni,21
+Războieni,Auid,8
+Auid,Teiuș,16
+Teiuș,Blaj,22
+Blaj,Copșa Mică,25
+Copșa Mică,Mediaș,28
+Mediaș,Dumbrăveni,15
+Dumbrăveni,Sighișoara,20
+Sighișoara,Vânători,11
+Vânători,Rupea,16
+Rupea,Brașov,48
+Brașov,Predeal,25
+Predeal,Azuga,10
+Azuga,Bușteni,6
+Bușteni,Sinaia,12
+Sinaia,Comarnic,10
+Comarnic,Câmpina,16
+Câmpina,Ploiești,22
 Ploiești,Buftea
 Buftea,București
 București,Fundulea
