@@ -23,16 +23,16 @@ unordered_map<string, Station> stations;
 void read_railway() {
     char buffer[200];
     int distance;
+    string station_name_1;
+    string station_name_2;
+    Railway railway_1;
+    Railway railway_2;
     while (railway_in.getline(buffer, 200, ',')) {
-        string station_name_1;
-        string station_name_2;
         station_name_1 = buffer;
         railway_in.getline(buffer, 200, ',');
         station_name_2 = buffer;
         railway_in.getline(buffer, 200);
         distance = stoi(buffer);
-        Railway railway_1;
-        Railway railway_2;
         railway_1.distance = distance;
         railway_2.distance = distance;
         railway_1.destination = station_name_2;
