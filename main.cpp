@@ -6,7 +6,7 @@
 
 using namespace std;
 
-ifstream fin("input.in");
+ifstream railway_in("railway.in");
 
 struct Railway {
     string destination;
@@ -20,7 +20,33 @@ struct Station {
 
 unordered_map<string, Station> stations;
 
+void read_railway() {
+    char buffer[200];
+    int distance;
+    while (railway_in.getline(buffer, 200, ',')) {
+        string station_name_1;
+        string station_name_2;
+        station_name_1 = buffer;
+        railway_in.getline(buffer, 200, ',');
+        station_name_2 = buffer;
+        railway_in.getline(buffer, 200);
+        distance = stoi(buffer);
+        Railway railway_1;
+        Railway railway_2;
+        railway_1.distance = distance;
+        railway_2.distance = distance;
+        railway_1.destination = station_name_2;
+        railway_2.destination = station_name_1;
+        stations[station_name_1].name = station_name_1;
+        stations[station_name_2].name = station_name_2;
+        stations[station_name_1].neighbours.push_back(railway_1);
+        stations[station_name_2].neighbours.push_back(railway_2);
+    }
+}
 
 int main() {
-
+    read_railway();
+    for (const Railway& railway : stations["Simeria"].neighbours) {
+        printf("%s %d\n", railway.destination.c_str(), railway.distance);
+    }
 }
