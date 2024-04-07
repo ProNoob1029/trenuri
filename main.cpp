@@ -4,7 +4,7 @@
 #include "string"
 #include "unordered_map"
 
-using std::vector, std::ifstream, std::string, std::unordered_map;
+using namespace std;
 
 ifstream fin("input.in");
 
