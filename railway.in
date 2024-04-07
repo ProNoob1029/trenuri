@@ -1,4 +1,3 @@
-Station1,Station2,Distance(km)
 Cluj-Napoca,Apahida,16
 Apahida,Câmpia Turzii,10
 Câmpia Turzii,Războieni,21
@@ -19,105 +18,105 @@ Bușteni,Sinaia,12
 Sinaia,Comarnic,10
 Comarnic,Câmpina,16
 Câmpina,Ploiești,22
-Ploiești,Buftea
-Buftea,București
-București,Fundulea
-Fundulea,Lehliu-Gară
-Lehliu-Gară,Ciulnița
-Ciulnița,Călărași
-Ciulnița,Fetești
-Fetești,Cernavodă
-Cernavodă,Medgidia
-Medgidia,Murfatlar
-Murfatlar,Constanța
-Constanța,Eforie
-Teiuș,Alba Iulia
-Alba Iulia,Șibot
-Șibot,Orăștie
-Orăștie,Simeria
-Simeria,Hunedoara
-Simeria,Ilia
-Ilia,Lipova
-Lipova,Arad
-Arad,Sântandrei
-Sântandrei,Timișoara
-Timișoara,Recaș
-Recaș,Lugoj
-Lugoj,Caransebeș
-Caransebeș,Băile Herculane
-Băile Herculane,Orșova
-Orșova,Drobeta-Turnu Severin
-Drobeta-Turnu Severin,Strehaia
-Strehaia,Filiași
-Filiași,Craiova
-Filiași,Turceni
-Turceni,Rovinari
-Rovinari,Târgu Jiu
-Târgu Jiu,Bumbești-Jiu
-Bumbești-Jiu,Livezeni
-Livezeni,Petroșani
-Petroșani,Subcetate
-Subcetate,Călan
-Călan,Simeria
-Craiova,Caracal
-Caracal,Drăgănești-Olt
-Drăgănești-Olt,Roșiori de Vede
-Roșiori de Vede,Videle
-Videle,București
-Apahida,Gherla
-Gherla,Dej
-Dej,Beclean
-Beclean,Salva
-Salva,Năsăud
-Năsăud,Ilva Mică
-Ilva Mică,Floreni
-Floreni,Vatra Dornei
-Vatra Dornei,Câmpulung Moldovenesc
-Câmpulung Moldovenesc,Vama
-Vama,Gura Humorului
-Gura Humorului,Păltinoasa
-Păltinoasa,Suceava
-Suceava,Verești
-Verești,Dolhasca
-Dolhasca,Pașcani
-Pașcani,Târgu Neamț
-Pașcani,Târgu Frumos
-Pașcani,Roman
-Târgu Frumos,Podu Iloaiei
-Podu Iloaiei,Lețcani
-Lețcani,Iași
-Roman,Bacău
-Bacău,Adjud
-Adjud,Mărășești
-Mărășești,Tecuci
-Tecuci,Barboși
-Barboși,Galați
-Barboși,Brăila
-Mărășești,Focșani
-Focșani,Râmnicu Sărat
-Râmnicu Sărat,Buzău
-Brăila,Ianca
-Ianca,Făurei
-Făurei,Buzău
-Făurei,Țăndărei
-Țăndărei,Fetești
-Buzău,Mizil
-Mizil,Ploiești
-Beclean,Șieu Măgheruș
-Șieu Măgheruș,Sărățel
-Sărățel,Bistrița
-Sărățel,Deda
-Deda,Toplița
-Toplița,Gheorgheni
-Gheorgheni,Voșlobeni
-Voșlobeni,Ciceu
-Ciceu,Miercurea Ciuc
-Miercurea Ciuc,Băile Tușnad
-Băile Tușnad,Sfântu Gheorghe
-Sfântu Gheorghe,Brașov
-Ciceu,Ghimeș
-Ghimeș,Comănești
-Comănești,Dărmănești
-Dărmănești,Târgu Ocna
-Târgu Ocna,Onești
-Onești,Adjud
+Ploiești,Buftea,15
+Buftea,București,20
+București,Fundulea,30
+Fundulea,Lehliu-Gară,25
+Lehliu-Gară,Ciulnița,20
+Ciulnița,Călărași,40
+Ciulnița,Fetești,35
+Fetești,Cernavodă,50
+Cernavodă,Medgidia,30
+Medgidia,Murfatlar,25
+Murfatlar,Constanța,40
+Constanța,Eforie,25
+Teiuș,Alba Iulia,40
+Alba Iulia,Șibot,30
+Șibot,Orăștie,20
+Orăștie,Simeria,25
+Simeria,Hunedoara,15
+Simeria,Ilia,30
+Ilia,Lipova,25
+Lipova,Arad,35
+Arad,Sântandrei,10
+Sântandrei,Timișoara,25
+Timișoara,Recaș,20
+Recaș,Lugoj,30
+Lugoj,Caransebeș,35
+Caransebeș,Băile Herculane,40
+Băile Herculane,Orșova,25
+Orșova,Drobeta-Turnu Severin,30
+Drobeta-Turnu Severin,Strehaia,35
+Strehaia,Filiași,40
+Filiași,Craiova,30
+Filiași,Turceni,20
+Turceni,Rovinari,25
+Rovinari,Târgu Jiu,15
+Târgu Jiu,Bumbești-Jiu,10
+Bumbești-Jiu,Livezeni,20
+Livezeni,Petroșani,15
+Petroșani,Subcetate,25
+Subcetate,Călan,20
+Călan,Simeria,30
+Craiova,Caracal,70
+Caracal,Drăgănești-Olt,35
+Drăgănești-Olt,Roșiori de Vede,45
+Roșiori de Vede,Videle,30
+Videle,București,80
+Apahida,Gherla,15
+Gherla,Dej,25
+Dej,Beclean,30
+Beclean,Salva,20
+Salva,Năsăud,40
+Năsăud,Ilva Mică,25
+Ilva Mică,Floreni,30
+Floreni,Vatra Dornei,70
+Vatra Dornei,Câmpulung Moldovenesc,40
+Câmpulung Moldovenesc,Vama,30
+Vama,Gura Humorului,20
+Gura Humorului,Păltinoasa,15
+Păltinoasa,Suceava,25
+Suceava,Verești,30
+Verești,Dolhasca,20
+Dolhasca,Pașcani,30
+Pașcani,Târgu Neamț,40
+Pașcani,Târgu Frumos,35
+Pașcani,Roman,20
+Târgu Frumos,Podu Iloaiei,15
+Podu Iloaiei,Lețcani,10
+Lețcani,Iași,20
+Roman,Bacău,50
+Bacău,Adjud,30
+Adjud,Mărășești,40
+Mărășești,Tecuci,25
+Tecuci,Barboși,35
+Barboși,Galați,40
+Barboși,Brăila,50
+Mărășești,Focșani,30
+Focșani,Râmnicu Sărat,35
+Râmnicu Sărat,Buzău,30
+Brăila,Ianca,25
+Ianca,Făurei,20
+Făurei,Buzău,40
+Făurei,Țăndărei,35
+Țăndărei,Fetești,20
+Buzău,Mizil,30
+Mizil,Ploiești,40
+Beclean,Șieu Măgheruș,25
+Șieu Măgheruș,Sărățel,20
+Sărățel,Bistrița,45
+Sărățel,Deda,35
+Deda,Toplița,50
+Toplița,Gheorgheni,40
+Gheorgheni,Voșlobeni,30
+Voșlobeni,Ciceu,25
+Ciceu,Miercurea Ciuc,20
+Miercurea Ciuc,Băile Tușnad,15
+Băile Tușnad,Sfântu Gheorghe,40
+Sfântu Gheorghe,Brașov,60
+Ciceu,Ghimeș,25
+Ghimeș,Comănești,35
+Comănești,Dărmănești,20
+Dărmănești,Târgu Ocna,25
+Târgu Ocna,Onești,30
+Onești,Adjud,40
