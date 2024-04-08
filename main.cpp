@@ -113,10 +113,13 @@ void window() {
 
     SetTargetFPS(60);
 
+    Texture bg = LoadTexture("bg.png");
+
     while (!WindowShouldClose() && !iasi_done) {
         BeginDrawing();
         ClearBackground(WHITE);
-        DrawText("Iasi", 20, 20, 80, BLACK);
+        DrawTextureEx(bg, {-100, -250}, 0, 1, WHITE);
+        DrawText("Iasi", 20, 20, 80, WHITE);
         EndDrawing();
     }
 
