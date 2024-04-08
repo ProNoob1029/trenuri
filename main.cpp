@@ -11,19 +11,21 @@ using namespace std;
 ifstream railway_in("railway.in");
 
 struct Railway {
-    string destination;
+    int destId = -1;
+    string destName;
     int distance = 1;
 };
 
 struct Station {
+    int id = -1;
     string name;
     vector<Railway> neighbours;
-    int id = -1;
 };
 
+unordered_map<string, int> nameIds;
+vector<Station> stations;
+
 const int inf = -1;
-unordered_map<string, Station> stations;
-string keys[200];
 int cost_min[200][200];
 
 void read_railway() {
@@ -33,33 +35,38 @@ void read_railway() {
     string station_name_2;
     Railway railway_1;
     Railway railway_2;
+    int id = 0;
     while (railway_in.getline(buffer, 200, ',')) {
         station_name_1 = buffer;
         railway_in.getline(buffer, 200, ',');
         station_name_2 = buffer;
         railway_in.getline(buffer, 200);
         distance = stoi(buffer);
+
+        if (nameIds.count(station_name_1) == 0) {
+            nameIds[station_name_1] = id;
+            id++;
+            stations.emplace_back();
+        }
+        if (nameIds.count(station_name_2) == 0) {
+            nameIds[station_name_2] = id;
+            id++;
+            stations.emplace_back();
+        }
+
         railway_1.distance = distance;
         railway_2.distance = distance;
-        railway_1.destination = station_name_2;
-        railway_2.destination = station_name_1;
-        stations[station_name_1].name = station_name_1;
-        stations[station_name_2].name = station_name_2;
-        stations[station_name_1].neighbours.push_back(railway_1);
-        stations[station_name_2].neighbours.push_back(railway_2);
-    }
+        railway_1.destName = station_name_2;
+        railway_2.destName = station_name_1;
+        railway_1.destId = nameIds[station_name_2];
+        railway_2.destId = nameIds[station_name_1];
 
-    vector<string> key_list;
-    key_list.reserve(stations.size());
-    for (pair<string, Station> pairs : stations) {
-        key_list.push_back(pairs.first);
-    }
-
-    int id = 0;
-    for (const string& key : key_list) {
-        stations[key].id = id;
-        keys[id] = key;
-        id++;
+        stations[nameIds[station_name_1]].name = station_name_1;
+        stations[nameIds[station_name_2]].name = station_name_2;
+        stations[nameIds[station_name_1]].neighbours.push_back(railway_1);
+        stations[nameIds[station_name_2]].neighbours.push_back(railway_2);
+        stations[nameIds[station_name_1]].id = nameIds[station_name_1];
+        stations[nameIds[station_name_2]].id = nameIds[station_name_2];
     }
 }
 
@@ -76,9 +83,9 @@ void calculate_roy_floyd() {
         }
     }
 
-    for (int i = 0; i < size; i++) {
-        for (const Railway& railway : stations[keys[i]].neighbours) {
-            cost_min[i][stations[railway.destination].id] = railway.distance;
+    for (const Station& station : stations) {
+        for (const Railway& railway : station.neighbours) {
+            cost_min[station.id][railway.destId] = railway.distance;
         }
     }
 
@@ -134,7 +141,7 @@ int main() {
     read_railway();
     calculate_roy_floyd();
 
-    int min = cost_min[stations["Cluj-Napoca"].id][stations["Iași"].id];
+    int min = cost_min[nameIds["Cluj-Napoca"]][nameIds["București"]];
     printf("%d\n", min);
 
     string station = "Cluj-Napoca";
@@ -142,14 +149,14 @@ int main() {
     string input;
 
     while (true) {
-        for (const Railway& railway : stations[station].neighbours) {
-            printf("%s %d\n", railway.destination.c_str(), railway.distance);
+        for (const Railway& railway : stations[nameIds[station]].neighbours) {
+            printf("%s %d\n", railway.destName.c_str(), railway.distance);
         }
 
         cin.getline(buffer , 200);
         input = buffer;
 
-        if (stations.count(input)) {
+        if (nameIds.count(input)) {
             station = input;
         }
     }
