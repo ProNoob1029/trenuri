@@ -46,12 +46,18 @@ void read_railway() {
     }
 }
 
+thread iasi_thread;
+bool iasi_done = true;
+
 void window() {
+    iasi_done = false;
+    SetTraceLogLevel(LOG_ERROR);
+
     InitWindow(800, 800, "Iasi");
 
     SetTargetFPS(60);
 
-    while (!WindowShouldClose()) {
+    while (!WindowShouldClose() && !iasi_done) {
         BeginDrawing();
         ClearBackground(WHITE);
         DrawText("Iasi", 20, 20, 80, BLACK);
@@ -59,6 +65,18 @@ void window() {
     }
 
     CloseWindow();
+    iasi_done = true;
+}
+
+void open_Iasi() {
+    iasi_thread = thread(window);
+}
+
+void close_Iasi() {
+    if (!iasi_done) {
+        iasi_done = true;
+        iasi_thread.join();
+    }
 }
 
 int main() {
@@ -66,10 +84,10 @@ int main() {
     for (const Railway& railway : stations["Simeria"].neighbours) {
         printf("%s %d\n", railway.destination.c_str(), railway.distance);
     }
-    int num;
+    char num;
     cin >> num;
-
-    thread window_thread(window);
+    open_Iasi();
 
     cin >> num;
+    close_Iasi();
 }
