@@ -3,6 +3,8 @@
 #include "fstream"
 #include "string"
 #include "unordered_map"
+#include "thread"
+#include "raylib.h"
 
 using namespace std;
 
@@ -44,9 +46,30 @@ void read_railway() {
     }
 }
 
+void window() {
+    InitWindow(800, 800, "Iasi");
+
+    SetTargetFPS(60);
+
+    while (!WindowShouldClose()) {
+        BeginDrawing();
+        ClearBackground(WHITE);
+        DrawText("Iasi", 20, 20, 80, BLACK);
+        EndDrawing();
+    }
+
+    CloseWindow();
+}
+
 int main() {
     read_railway();
     for (const Railway& railway : stations["Simeria"].neighbours) {
         printf("%s %d\n", railway.destination.c_str(), railway.distance);
     }
+    int num;
+    cin >> num;
+
+    thread window_thread(window);
+
+    cin >> num;
 }
