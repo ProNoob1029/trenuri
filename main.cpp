@@ -113,7 +113,7 @@ void window() {
 
     SetTargetFPS(60);
 
-    Texture bg = LoadTexture("bg.png");
+    Texture bg = LoadTexture("iasi.png");
 
     while (!WindowShouldClose() && !iasi_done) {
         BeginDrawing();
