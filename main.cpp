@@ -71,7 +71,7 @@ void read_railway() {
 }
 
 void calculate_roy_floyd() {
-    int size = stations.size();
+    int size = static_cast<int>(stations.size());
 
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
@@ -93,9 +93,7 @@ void calculate_roy_floyd() {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 if (cost_min[i][k] != inf && cost_min[k][j] != inf) {
-                    if (cost_min[i][j] == inf) {
-                        cost_min[i][j] = cost_min[i][k] + cost_min[k][j];
-                    } else if (cost_min[i][j] > cost_min[i][k] + cost_min[k][j]) {
+                    if (cost_min[i][j] == inf || cost_min[i][j] > cost_min[i][k] + cost_min[k][j]) {
                         cost_min[i][j] = cost_min[i][k] + cost_min[k][j];
                     }
                 }
