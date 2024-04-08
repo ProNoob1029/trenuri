@@ -156,12 +156,11 @@ int main() {
 
         if (nameIds.count(input)) {
             station = input;
+            if (station == "Iași") {
+                open_Iasi();
+            } else {
+                close_Iasi();
+            }
         }
     }
-    char num;
-    cin >> num;
-    open_Iasi();
-
-    cin >> num;
-    close_Iasi();
 }
