@@ -5,6 +5,7 @@
 #include "unordered_map"
 #include "thread"
 #include "raylib.h"
+#include "windows_stuff.h"
 
 using namespace std;
 
@@ -80,6 +81,7 @@ void close_Iasi() {
 }
 
 int main() {
+    windows_stuff();
     read_railway();
     for (const Railway& railway : stations["Simeria"].neighbours) {
         printf("%s %d\n", railway.destination.c_str(), railway.distance);
