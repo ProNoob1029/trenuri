@@ -8,6 +8,18 @@
 
 using namespace std;
 
+struct Dialog {
+    string introducere = "Bun venit la trip trip cu trenul prin România!\n";
+    string pickOption = "Alege una din următoarele opțiuni: \n0. Ieșire\n1. Excursie cu trenul\n\nNumărul opțiunii: ";
+    string invalidInput = "\nOpțiune invalidă, încearcă din nou!\n";
+} dialog;
+
+const int MAX_OPTION = 1;
+enum Option {
+    EXIT = 0,
+    EXCURSIE = 1
+};
+
 ifstream railway_in("railway.in");
 
 struct Railway {
@@ -136,18 +148,11 @@ void close_Iasi() {
     }
 }
 
-int main() {
-    read_railway();
-    calculate_roy_floyd();
-
-    int min = cost_min[nameIds["Cluj-Napoca"]][nameIds["București"]];
-    printf("%d\n", min);
-
+void excursie() {
     string station = "Cluj-Napoca";
-    char buffer[200];
     string input;
 
-    while (true) {
+    while (input != "exit") {
         for (const Railway& railway : stations[nameIds[station]].neighbours) {
             printf("%s %d\n", railway.destName.c_str(), railway.distance);
         }
@@ -161,6 +166,54 @@ int main() {
             } else {
                 close_Iasi();
             }
+        }
+    }
+
+    close_Iasi();
+}
+
+Option pickOption() {
+    bool done = false;
+    string input;
+    Option option;
+
+    while (!done) {
+        cout << dialog.pickOption;
+
+        getline(cin, input);
+
+        try {
+            option = (Option)stoi(input);
+            if (option > MAX_OPTION) {
+                throw invalid_argument("invalid option");
+            }
+            done = true;
+        } catch (...) {
+            cout << dialog.invalidInput;
+        }
+    }
+
+    cout << "\n";
+
+    return option;
+}
+
+int main() {
+    read_railway();
+    calculate_roy_floyd();
+
+    bool running = true;
+
+    cout << dialog.introducere;
+
+    while (running) {
+        switch (pickOption()) {
+            case EXCURSIE:
+                excursie();
+                break;
+            case EXIT:
+                running = false;
+                break;
         }
     }
 }
