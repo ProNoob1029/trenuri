@@ -9,9 +9,11 @@
 using namespace std;
 
 struct Dialog {
-    string introducere = "Bun venit la trip trip cu trenul prin România!\n";
+    string introducere = "Bun venit la trip trip cu trenul prin România!🚂\n";
     string pickOption = "Alege una din următoarele opțiuni: \n0. Ieșire\n1. Excursie cu trenul\n\nNumărul opțiunii: ";
     string invalidInput = "\nOpțiune invalidă, încearcă din nou!\n";
+    string introExcursie = "Te-ai decis să mergi în excursie cu trenul prin țară!🚂🚂\nAi auzit un zvon cum că în unele orașe ai putea găsi niște poze pierdute.📷\n"
+                           "Alege stația la care vrei să avansezi și încearcă să descoperi cât mai multe poze!\n";
 } dialog;
 
 const int MAX_OPTION = 1;
@@ -21,6 +23,7 @@ enum Option {
 };
 
 ifstream railway_in("railway.in");
+ifstream picture_in("pictures.in");
 
 struct Railway {
     int destId = -1;
@@ -35,6 +38,7 @@ struct Station {
 };
 
 unordered_map<string, int> nameIds;
+unordered_map<string, string> pictures;
 vector<Station> stations;
 
 const int inf = -1;
@@ -80,6 +84,15 @@ void read_railway() {
     }
 }
 
+void read_pictures() {
+    string station;
+    string fileName;
+    while (getline(picture_in, station, ',')) {
+        getline(picture_in, fileName);
+        pictures[station] = fileName;
+    }
+}
+
 void calculate_roy_floyd() {
     int size = static_cast<int>(stations.size());
 
@@ -112,43 +125,50 @@ void calculate_roy_floyd() {
     }
 }
 
-thread iasi_thread;
-bool iasi_done = true;
+thread window_thread;
+bool window_done = true;
 
-void window() {
-    iasi_done = false;
+void window(string station) {
+    window_done = false;
     SetTraceLogLevel(LOG_ERROR);
 
-    InitWindow(800, 800, "Iasi");
+    InitWindow(800, 800, "Picture");
 
     SetTargetFPS(60);
 
-    Texture bg = LoadTexture("iasi.png");
+    Texture texture = LoadTexture(pictures[station].c_str());
 
-    while (!WindowShouldClose() && !iasi_done) {
+    SetWindowSize(texture.width / 2, texture.height / 2);
+
+    while (!WindowShouldClose() && !window_done) {
         BeginDrawing();
         ClearBackground(WHITE);
-        DrawTextureEx(bg, {-100, -250}, 0, 1, WHITE);
-        DrawText("Iasi", 20, 20, 80, WHITE);
+        DrawTextureEx(texture, {0, 0}, 0, 0.5, WHITE);
+        DrawText(station.c_str(), 20, 20, 80, WHITE);
         EndDrawing();
     }
 
+    UnloadTexture(texture);
+
     CloseWindow();
-    iasi_done = true;
+    window_done = true;
 }
 
-void open_Iasi() {
-    iasi_thread = thread(window);
-}
-
-void close_Iasi() {
-    if (!iasi_done) {
-        iasi_done = true;
-        iasi_thread.join();
+void close_window() {
+    if (!window_done) {
+        window_done = true;
+        window_thread.join();
     }
 }
 
+void open_window(string &station) {
+    close_window();
+    window_thread = thread(window, station);
+}
+
 void excursie() {
+    cout << dialog.introExcursie;
+
     string station = "Cluj-Napoca";
     string input;
 
@@ -161,15 +181,15 @@ void excursie() {
 
         if (nameIds.count(input)) {
             station = input;
-            if (station == "Iași") {
-                open_Iasi();
+            if (pictures.count(station)) {
+                open_window(station);
             } else {
-                close_Iasi();
+                close_window();
             }
         }
     }
 
-    close_Iasi();
+    close_window();
 }
 
 Option pickOption() {
@@ -200,6 +220,7 @@ Option pickOption() {
 
 int main() {
     read_railway();
+    read_pictures();
     calculate_roy_floyd();
 
     bool running = true;
