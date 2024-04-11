@@ -20,6 +20,9 @@ if (NOT raylib_FOUND) # If there's none, fetch and build raylib
     endif()
 endif()
 
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} main.cpp
+        font.h
+        atlas.h
+        atlas.png.h)
 
 target_link_libraries(${PROJECT_NAME} raylib)

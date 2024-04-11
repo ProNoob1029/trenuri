@@ -5,6 +5,7 @@
 #include "unordered_map"
 #include "thread"
 #include "raylib.h"
+#include "font.h"
 
 using namespace std;
 
@@ -136,6 +137,8 @@ void window(string station) {
 
     SetTargetFPS(60);
 
+    LoadDefaultFont();
+
     Texture texture = LoadTexture(pictures[station].c_str());
 
     SetWindowSize(texture.width / 2, texture.height / 2);
@@ -144,11 +147,14 @@ void window(string station) {
         BeginDrawing();
         ClearBackground(WHITE);
         DrawTextureEx(texture, {0, 0}, 0, 0.5, WHITE);
-        DrawText(station.c_str(), 20, 20, 80, WHITE);
+        BeginShaderMode(defaultShader);
+        DrawTextEx(defaultFont, station.c_str(), {20, 20}, 80, 0, WHITE);
+        EndShaderMode();
         EndDrawing();
     }
 
     UnloadTexture(texture);
+    UnloadDefaultFont();
 
     CloseWindow();
     window_done = true;
