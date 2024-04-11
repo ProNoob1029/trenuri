@@ -29,19 +29,17 @@ const int inf = -1;
 int cost_min[200][200];
 
 void read_railway() {
-    char buffer[200];
     int distance;
+    string distanceStr;
     string station_name_1;
     string station_name_2;
     Railway railway_1;
     Railway railway_2;
     int id = 0;
-    while (railway_in.getline(buffer, 200, ',')) {
-        station_name_1 = buffer;
-        railway_in.getline(buffer, 200, ',');
-        station_name_2 = buffer;
-        railway_in.getline(buffer, 200);
-        distance = stoi(buffer);
+    while (getline(railway_in, station_name_1, ',')) {
+        getline(railway_in, station_name_2, ',');
+        getline(railway_in, distanceStr);
+        distance = stoi(distanceStr);
 
         if (nameIds.count(station_name_1) == 0) {
             nameIds[station_name_1] = id;
@@ -154,8 +152,7 @@ int main() {
             printf("%s %d\n", railway.destName.c_str(), railway.distance);
         }
 
-        cin.getline(buffer , 200);
-        input = buffer;
+        getline(cin, input);
 
         if (nameIds.count(input)) {
             station = input;
