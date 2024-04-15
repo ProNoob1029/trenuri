@@ -11,16 +11,26 @@ using namespace std;
 
 struct Dialog {
     string introducere = "Bun venit la trip trip cu trenul prin România!🚂\n";
-    string pickOption = "Alege una din următoarele opțiuni: \n0. Ieșire\n1. Excursie cu trenul\n\nNumărul opțiunii: ";
-    string invalidInput = "\nOpțiune invalidă, încearcă din nou!\n";
+    string pickOption = "Alege una din următoarele opțiuni: \n0. Ieșire\n1. Excursie cu trenul\n2. Află distanța între 2 orașe\n\nNumărul opțiunii: ";
+    string invalidInput = "Opțiune invalidă, încearcă din nou!\n\n";
     string introExcursie = "Te-ai decis să mergi în excursie cu trenul prin țară!🚂🚂\nAi auzit un zvon cum că în unele orașe ai putea găsi niște poze pierdute.📷\n"
-                           "Alege stația la care vrei să avansezi și încearcă să descoperi cât mai multe poze!\n";
+                           "Alege stația la care vrei să avansezi și încearcă să descoperi cât mai multe poze!\n"
+                           "Pornești din Cluj.\nScrie exit pentru a te reîntoarce la meniul principal\n\n";
+    string statii = "Stațiile disponibile:\n";
+    string statie = "%d. %s, %d kilometri\n";
+    string introDist = "Alege 2 orașe pentru care vrei să afli distanța minimă între ele\n\n";
+    string yourPick = "Alegerea ta: ";
+    string primulOras = "Primul oraș: ";
+    string alDoileaOras = "Al doilea oraș: ";
+    string tryAgain = "Vrei să încerci din nou? (da/nu): ";
+    string distOrase = "Distanța cu trenul dintre %s și %s este de (aproximativ) %d kilometri\n";
 } dialog;
 
-const int MAX_OPTION = 1;
+const int MAX_OPTION = 2;
 enum Option {
     EXIT = 0,
-    EXCURSIE = 1
+    EXCURSIE = 1,
+    DISTANTA
 };
 
 ifstream railway_in("railway.in");
@@ -129,7 +139,7 @@ void calculate_roy_floyd() {
 thread window_thread;
 bool window_done = true;
 
-void window(string station) {
+void window(const string &station) {
     window_done = false;
     SetTraceLogLevel(LOG_ERROR);
 
@@ -171,6 +181,34 @@ void open_window(string &station) {
     window_thread = thread(window, station);
 }
 
+bool tryAgain() {
+    bool done = false;
+    string input;
+    bool result;
+
+    while (!done) {
+        cout << dialog.tryAgain;
+
+        getline(cin, input);
+
+        cout << "\n";
+
+        if (input.find("da") != string::npos) {
+            result = true;
+            done = true;
+        } else if (input.find("nu") != string::npos) {
+            result = false;
+            done = true;
+        } else {
+            cout << dialog.invalidInput;
+        }
+    }
+
+    cout << "\n";
+
+    return result;
+}
+
 void excursie() {
     cout << dialog.introExcursie;
 
@@ -178,19 +216,44 @@ void excursie() {
     string input;
 
     while (input != "exit") {
+        cout << dialog.statii;
+        vector<string> options;
+        bool valid = false;
+
+        int i = 1;
+
         for (const Railway& railway : stations[nameIds[station]].neighbours) {
-            printf("%s %d\n", railway.destName.c_str(), railway.distance);
+            printf(dialog.statie.c_str(), i, railway.destName.c_str(), railway.distance);
+            options.push_back(railway.destName);
+            i++;
         }
+
+        cout << "\n" << dialog.yourPick;
 
         getline(cin, input);
 
+        cout << "\n";
+
         if (nameIds.count(input)) {
             station = input;
-            if (pictures.count(station)) {
-                open_window(station);
-            } else {
-                close_window();
+            valid = true;
+        } else {
+            try {
+                int option = stoi(input);
+                if (option > options.size()) {
+                    throw invalid_argument("invalid option");
+                }
+                station = options[option - 1];
+                valid = true;
+            } catch (...) {
+                cout << dialog.invalidInput;
             }
+        }
+
+        if (valid && pictures.count(station)) {
+            open_window(station);
+        } else {
+            close_window();
         }
     }
 
@@ -206,6 +269,8 @@ Option pickOption() {
         cout << dialog.pickOption;
 
         getline(cin, input);
+
+        cout << "\n";
 
         try {
             option = (Option)stoi(input);
@@ -223,6 +288,57 @@ Option pickOption() {
     return option;
 }
 
+void distantaOras() {
+    bool done = false;
+    string input;
+    string primul;
+    string second;
+
+    while (!done) {
+        cout << dialog.introDist;
+
+        bool primulDone = false;
+
+        while (!primulDone) {
+            cout << dialog.primulOras;
+
+            getline(cin, input);
+
+            cout << "\n";
+
+            if (nameIds.count(input)) {
+                primul = input;
+                primulDone = true;
+            } else {
+                cout << dialog.invalidInput;
+            }
+        }
+
+        bool secondDone = false;
+
+        while (!secondDone) {
+            cout << dialog.alDoileaOras;
+
+            getline(cin, input);
+
+            cout << "\n";
+
+            if (nameIds.count(input)) {
+                second = input;
+                secondDone = true;
+            } else {
+                cout << dialog.invalidInput;
+            }
+        }
+
+        printf(dialog.distOrase.c_str(), primul.c_str(), second.c_str(), cost_min[nameIds[primul]][nameIds[second]]);
+
+        cout << "\n";
+
+        done = !tryAgain();
+    }
+}
+
 int main() {
     read_railway();
     read_pictures();
@@ -236,6 +352,9 @@ int main() {
         switch (pickOption()) {
             case EXCURSIE:
                 excursie();
+                break;
+            case DISTANTA:
+                distantaOras();
                 break;
             case EXIT:
                 running = false;
