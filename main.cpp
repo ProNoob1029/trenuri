@@ -157,7 +157,6 @@ void window(string station) {
     UnloadDefaultFont();
 
     CloseWindow();
-    window_done = true;
 }
 
 void close_window() {
