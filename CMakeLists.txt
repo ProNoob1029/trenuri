@@ -22,6 +22,9 @@ endif()
 
 add_executable(${PROJECT_NAME} main.cpp
         windows_stuff.cpp
-        windows_stuff.h)
+        windows_stuff.h
+        font.h
+        atlas.h
+        atlas.png.h)
 
 target_link_libraries(${PROJECT_NAME} raylib -static)
