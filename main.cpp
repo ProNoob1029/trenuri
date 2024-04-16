@@ -12,9 +12,11 @@ using namespace std;
 
 struct Dialog {
     string introducere = "Bun venit la trip trip cu trenul prin România!🚂\n";
-    string pickOption = "Alege una din următoarele opțiuni: \n0. Ieșire\n1. Excursie cu trenul\n2. Află distanța între 2 orașe\n\nNumărul opțiunii: ";
+    string pickOption = "Alege una din următoarele opțiuni: \n0. Ieșire\n1. Excursie cu trenul\n"
+                        "2. Află distanța între 2 orașe\n\nNumărul opțiunii: ";
     string invalidInput = "Opțiune invalidă, încearcă din nou!\n\n";
-    string introExcursie = "Te-ai decis să mergi în excursie cu trenul prin țară!🚂🚂\nAi auzit un zvon cum că în unele orașe ai putea găsi niște poze pierdute.📷\n"
+    string introExcursie = "Te-ai decis să mergi în excursie cu trenul prin țară!🚂🚂\n"
+                           "Ai auzit un zvon cum că în unele orașe ai putea găsi niște poze pierdute.📷\n"
                            "Alege stația la care vrei să avansezi și încearcă să descoperi cât mai multe poze!\n"
                            "Pornești din Cluj.\nScrie exit pentru a te reîntoarce la meniul principal\n\n";
     string statii = "Stațiile disponibile:\n";
@@ -332,7 +334,9 @@ void distantaOras() {
             }
         }
 
-        printf(dialog.distOrase.c_str(), primul.c_str(), second.c_str(), cost_min[nameIds[primul]][nameIds[second]]);
+        int cost = cost_min[nameIds[primul]][nameIds[second]];
+
+        printf(dialog.distOrase.c_str(), primul.c_str(), second.c_str(), cost);
 
         cout << "\n";
 
